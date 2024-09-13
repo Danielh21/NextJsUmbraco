@@ -6,49 +6,31 @@ import Intro from "../components/intro";
 import Layout from "../components/layout";
 import { EXAMPLE_TOOL_NAME } from "../lib/constants";
 import Post from "../types/post";
-import { getAllPostsForHome } from "../lib/api";
+import { fetchHome } from "../lib/nxo_api";
 
 type Props = {
-  posts: Post[];
-  preview: boolean;
+  page: any;
 };
 
-export default function Index({ posts, preview }: Props) {
-  const heroPost = posts[0];
-  const morePosts = posts.slice(1);
-
+export default function Index({ page }: Props) {
   return (
     <>
-      <Layout preview={preview}>
+      <Layout preview={true}>
         <Head>
           <title>Next.js Blog Example with {EXAMPLE_TOOL_NAME}</title>
         </Head>
-        <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
       </Layout>
     </>
   );
 }
 
 export async function getStaticProps({ preview }: { preview: boolean }) {
-  const posts = await getAllPostsForHome(preview);
+  const homePage = await fetchHome(false);
+  console.log(homePage);
 
   return {
     props: {
-      posts: posts,
-      preview: preview || null,
+      page: homePage,
     },
   };
 }
