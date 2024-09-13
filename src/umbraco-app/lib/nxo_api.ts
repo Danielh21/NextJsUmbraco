@@ -1,6 +1,8 @@
 import Post from "../types/post";
 import Author from "../types/author";
 import PostAndMorePosts from "../types/postAndMorePosts";
+import pageFolder from "../types/pagesFolder";
+import pageRoutingModel from "../types/pageRoutingModel";
 
 const UMBRACO_SERVER_URL = process.env.UMBRACO_SERVER_URL;
 const UMBRACO_DELIVERY_API_KEY = process.env.UMBRACO_DELIVERY_API_KEY;
@@ -17,46 +19,8 @@ const performFetch = async (url: string, options: RequestInit) => {
   return await response.json();
 };
 
-const fetchSingle = async (slug: string, startItem: string, preview: boolean) =>
-  await performFetch(`${UMBRACO_API_URL}/item/${slug}`, {
-    method: "GET",
-    headers: {
-      "Start-Item": startItem,
-      "Api-Key": UMBRACO_DELIVERY_API_KEY,
-      Preview: preview ? "true" : "false",
-    },
-  });
-
-const fetchAll = async (
-  expandAuthor: boolean,
-  numberOfPosts: number,
-  preview: boolean
-) => {
-  const expand = expandAuthor ? "properties[author]" : "";
-  const take = numberOfPosts ?? 10;
-  return await fetchMultiple(
-    `fetch=children:/&expand=${expand}&sort=updateDate:desc&take=${take}`,
-    "posts",
-    preview
-  );
-};
-
-const fetchMultiple = async (
-  query: string,
-  startItem: string,
-  preview: boolean
-) =>
-  await performFetch(`${UMBRACO_API_URL}/?${query}`, {
-    method: "GET",
-    headers: {
-      "Start-Item": startItem,
-      "Api-Key": UMBRACO_DELIVERY_API_KEY,
-      Preview: preview ? "true" : "false",
-    },
-  });
-
-export const fetchpages = async (preview: boolean) => {
-  const url = `${UMBRACO_API_URL}?filter=contentType%3Apage`;
+export const fetchPageFolders = async (preview: boolean) => {
+  const url = `${UMBRACO_API_URL}?filter=contentType:pages&skip=0&fields=properties:[id]`;
 
   var response = await performFetch(url, {
     method: "GET",
@@ -65,7 +29,41 @@ export const fetchpages = async (preview: boolean) => {
       Preview: preview ? "true" : "false",
     },
   });
-  return response;
+
+  const items = response.items;
+  const folders: pageFolder[] = [];
+  items.forEach((it) => {
+    folders.push({
+      id: it.id,
+      path: it.route.path,
+    });
+  });
+
+  return folders;
+};
+
+export const fetchSubPagesFromFolder = async (
+  folder: pageFolder,
+  preview: boolean
+) => {
+  const url = `${UMBRACO_API_URL}?filter=contentType:page&fields=properties[id]`;
+
+  var response = await performFetch(url, {
+    method: "GET",
+    headers: {
+      "Api-Key": UMBRACO_DELIVERY_API_KEY,
+      Preview: preview ? "true" : "false",
+      "Start-Item": folder.id,
+    },
+  });
+
+  const items = response.items;
+  const routingModel: string[] = [];
+  items.forEach((it) => {
+    let combinedRoute = folder.path + it.route.path.substring(1);
+    routingModel.push(combinedRoute);
+  });
+  return routingModel;
 };
 
 export const fetchHome = async (preview: boolean) => {

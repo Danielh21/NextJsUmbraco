@@ -7,7 +7,6 @@ import Layout from "../components/layout";
 import { EXAMPLE_TOOL_NAME } from "../lib/constants";
 import Post from "../types/post";
 import { getAllPostsForHome } from "../lib/api";
-import { fetchpages } from "../lib/nxo_api";
 
 type Props = {
   posts: Post[];
@@ -45,8 +44,6 @@ export default function Index({ posts, preview }: Props) {
 
 export async function getStaticProps({ preview }: { preview: boolean }) {
   const posts = await getAllPostsForHome(preview);
-  const pages = await fetchpages;
-  console.log(pages);
 
   return {
     props: {
