@@ -1,19 +1,18 @@
 import Head from "next/head";
 import Container from "../components/container";
-import MoreStories from "../components/more-stories";
-import HeroPost from "../components/hero-post";
-import Intro from "../components/intro";
 import Layout from "../components/layout";
 import { EXAMPLE_TOOL_NAME } from "../lib/constants";
-import Post from "../types/post";
 import { fetchHome } from "../lib/nxo_api";
 import PageType from "../types/pageType";
+import Grid from "../components/grid";
 
 type Props = {
   page: PageType;
 };
 
 export default function Index({ page }: Props) {
+  const gridItems = page.properties.grid;
+
   return (
     <>
       <Layout preview={true}>
@@ -22,6 +21,7 @@ export default function Index({ page }: Props) {
         </Head>
         <Container>
           <h2>{page.properties.metaKeyWord}</h2>
+          <Grid Grid={gridItems} />
         </Container>
       </Layout>
     </>
