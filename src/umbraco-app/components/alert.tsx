@@ -1,12 +1,16 @@
 import Container from "./container";
 import cn from "classnames";
 import { EXAMPLE_PATH } from "../lib/constants";
+import { usePathname } from "next/navigation";
 
 type Props = {
   preview?: boolean;
 };
 
 export default function Alert({ preview }: Props) {
+  const pathname = usePathname();
+  const exitPath = `/api/exit-preview?pathName=${pathname}`;
+
   return (
     <div
       className={cn("border-b", {
@@ -20,7 +24,7 @@ export default function Alert({ preview }: Props) {
             <>
               This is a page preview.{" "}
               <a
-                href="/api/exit-preview"
+                href={exitPath}
                 className="underline hover:text-cyan duration-200 transition-colors"
               >
                 Click here
@@ -29,7 +33,7 @@ export default function Alert({ preview }: Props) {
             </>
           ) : (
             <>
-              The source code for this blog is{" "}
+              Nexusone Created - extened by the vercel{" "}
               <a
                 href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
                 className="underline hover:text-success duration-200 transition-colors"
