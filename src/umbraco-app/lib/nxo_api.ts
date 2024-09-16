@@ -78,3 +78,16 @@ export const fetchHome = async (preview: boolean) => {
   });
   return response;
 };
+
+export const fetchByPath = async (preview: boolean, path: string) => {
+  const url = `${UMBRACO_API_URL}/item/${path}?fields=properties%5B%24all%5D`;
+
+  var response = await performFetch(url, {
+    method: "GET",
+    headers: {
+      "Api-Key": UMBRACO_DELIVERY_API_KEY,
+      Preview: preview ? "true" : "false",
+    },
+  });
+  return response;
+};

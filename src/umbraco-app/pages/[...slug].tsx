@@ -1,17 +1,36 @@
-import { useRouter } from "next/router";
 import { NextPage } from "next";
-import { fetchPageFolders, fetchSubPagesFromFolder } from "../lib/nxo_api";
+import {
+  fetchByPath,
+  fetchPageFolders,
+  fetchSubPagesFromFolder,
+} from "../lib/nxo_api";
+import Head from "next/head";
+import Container from "../components/container";
+import Layout from "../components/layout";
+import { EXAMPLE_TOOL_NAME } from "../lib/constants";
+import PageType from "../types/pageType";
+import Grid from "../components/grid";
 
-const DynamicPage: NextPage = (props: Params) => {
-  // const { slug } = router.query;
-  const { slug } = props;
+const DynamicPage: NextPage = ({ page }: PageProps) => {
+  const gridItems = page.properties.grid;
 
   return (
-    <div>
-      <h1>Dynamic Page</h1>
-      <p>Slug: {slug.map((s) => s + "-")}</p>
-    </div>
+    <>
+      <Layout preview={true}>
+        <Head>
+          <title>Next.js Blog Example with {EXAMPLE_TOOL_NAME}</title>
+        </Head>
+        <Container>
+          <h2>{page.properties.metaKeyWord}</h2>
+          <Grid Grid={gridItems} />
+        </Container>
+      </Layout>
+    </>
   );
+};
+
+type PageProps = {
+  page: PageType;
 };
 
 type Params = {
@@ -46,9 +65,11 @@ export async function getStaticProps({
   params: Params;
   preview: boolean;
 }) {
+  const lastPathOfSlug = params.slug?.pop() ?? "";
+  const pageByPath = (await fetchByPath(preview, lastPathOfSlug)) as PageType;
   return {
     props: {
-      slug: params.slug,
+      page: pageByPath,
     },
   };
 }
