@@ -2,6 +2,8 @@ import React from "react";
 import Hero from "./hero";
 import HeroContentType from "../types/heroContentType";
 import { GridProperties, GridType } from "../types/gridType";
+import TextComponent from "./textComponent";
+import TextContentType from "../types/TextContentType";
 
 interface GridPros {
   Grid: GridType;
@@ -22,6 +24,8 @@ const project = (gridItem: GridProperties) => {
   switch (gridItem.content.contentType) {
     case "hero":
       return <Hero content={gridItem.content as HeroContentType} />;
+    case "text":
+      return <TextComponent content={gridItem.content as TextContentType} />;
     default:
       return <h1>No project match</h1>;
   }
