@@ -8,14 +8,15 @@ import Grid from "../components/grid";
 
 type Props = {
   page: PageType;
+  preview: boolean;
 };
 
-export default function Index({ page }: Props) {
+export default function Index({ page, preview }: Props) {
   const gridItems = page.properties.grid;
 
   return (
     <>
-      <Layout preview={true}>
+      <Layout preview={preview}>
         <Head>
           <title>Next.js Blog Example with {EXAMPLE_TOOL_NAME}</title>
         </Head>
@@ -28,12 +29,13 @@ export default function Index({ page }: Props) {
   );
 }
 
-export async function getStaticProps({ preview }: { preview: boolean }) {
-  const homePage = (await fetchHome(false)) as PageType;
-
+export async function getStaticProps(props) {
+  const draftMode = props.draftMode ?? false;
+  const homePage = (await fetchHome(draftMode)) as PageType;
   return {
     props: {
       page: homePage,
+      preview: draftMode,
     },
   };
 }

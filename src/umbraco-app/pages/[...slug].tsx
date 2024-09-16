@@ -11,12 +11,17 @@ import { EXAMPLE_TOOL_NAME } from "../lib/constants";
 import PageType from "../types/pageType";
 import Grid from "../components/grid";
 
-const DynamicPage: NextPage = ({ page }: PageProps) => {
+type PageProps = {
+  page: PageType;
+  preview: boolean;
+};
+
+const DynamicPage: NextPage = ({ page, preview }: PageProps) => {
   const gridItems = page.properties.grid;
 
   return (
     <>
-      <Layout preview={true}>
+      <Layout preview={preview}>
         <Head>
           <title>Next.js Blog Example with {EXAMPLE_TOOL_NAME}</title>
         </Head>
@@ -28,15 +33,6 @@ const DynamicPage: NextPage = ({ page }: PageProps) => {
     </>
   );
 };
-
-type PageProps = {
-  page: PageType;
-};
-
-type Params = {
-  slug: string[];
-};
-
 export async function getStaticPaths({ preview }: { preview: boolean }) {
   const folders = await fetchPageFolders(false);
   let paths: string[] = [];
@@ -58,18 +54,14 @@ export async function getStaticPaths({ preview }: { preview: boolean }) {
   };
 }
 
-export async function getStaticProps({
-  params,
-  preview,
-}: {
-  params: Params;
-  preview: boolean;
-}) {
-  const lastPathOfSlug = params.slug?.pop() ?? "";
-  const pageByPath = (await fetchByPath(preview, lastPathOfSlug)) as PageType;
+export async function getStaticProps(props) {
+  const draftMode = props.draftMode ?? false;
+  const lastPathOfSlug = props.params.slug?.pop() ?? "";
+  const pageByPath = (await fetchByPath(draftMode, lastPathOfSlug)) as PageType;
   return {
     props: {
       page: pageByPath,
+      preview: draftMode,
     },
   };
 }

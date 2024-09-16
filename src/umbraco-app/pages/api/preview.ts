@@ -4,7 +4,7 @@ export default async function preview(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { secret } = req.query;
+  const { secret, path } = req.query;
 
   // Check the secret and next parameters
   // This secret should only be known by this API route
@@ -18,7 +18,13 @@ export default async function preview(
 
   res.setDraftMode({ enable: true });
 
-  res.redirect("/");
+  if (path == "") {
+    res.redirect("/");
+    res.end();
+    return res;
+  }
+
+  res.redirect(path as string);
   res.end();
   return res;
 }
