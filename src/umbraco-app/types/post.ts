@@ -5,7 +5,7 @@ type Post = {
   id: string;
   slug: string;
   title: string;
-  coverImage: Picture;
+  coverImage?: Picture;
   date: string;
   author: Author;
   excerpt: string;

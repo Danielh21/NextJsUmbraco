@@ -47,9 +47,6 @@ const extractAuthor = (author: any): Author => {
   return {
     id: author.id,
     name: author.name,
-    picture: {
-      url: `${UMBRACO_SERVER_URL}${author.properties.picture[0].url}`,
-    },
   };
 };
 
@@ -60,9 +57,6 @@ const extractPost = (post: any): Post => {
     id: post.id,
     slug: extractSlug(post),
     title: post.name,
-    coverImage: {
-      url: `${UMBRACO_SERVER_URL}${post.properties.coverImage[0].url}`,
-    },
     date: post.updateDate,
     author: author,
     excerpt: post.properties.excerpt,

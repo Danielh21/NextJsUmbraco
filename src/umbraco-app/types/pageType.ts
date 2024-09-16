@@ -1,3 +1,5 @@
+import { GridType } from "./gridType";
+
 type PageType = {
   name: string;
   route: {
@@ -7,7 +9,7 @@ type PageType = {
   properties: {
     metaDescription: string;
     metaKeyWord: string;
-    grid: Grid;
+    grid: GridType;
   };
 };
 
