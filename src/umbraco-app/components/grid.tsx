@@ -4,6 +4,8 @@ import HeroContentType from "../types/heroContentType";
 import { GridProperties, GridType } from "../types/gridType";
 import TextComponent from "./textComponent";
 import TextContentType from "../types/TextContentType";
+import PageLinkContentType from "../types/PageLinkContentType";
+import PageLinkComponent from "./PageLinkComponent";
 
 interface GridPros {
   Grid: GridType;
@@ -26,6 +28,10 @@ const project = (gridItem: GridProperties) => {
       return <Hero content={gridItem.content as HeroContentType} />;
     case "text":
       return <TextComponent content={gridItem.content as TextContentType} />;
+    case "pageLink":
+      return (
+        <PageLinkComponent content={gridItem.content as PageLinkContentType} />
+      );
     default:
       return <h1>No project match</h1>;
   }
