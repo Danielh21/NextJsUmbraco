@@ -114,16 +114,28 @@ export const GetMetaDataForGrid = async (
 ): Promise<GridType> => {
   const routesPromises = grid.items.map(async (item) => {
     // Getting metadata for specific items
+
+    // Page Link Content Type Start
     if (item.content.contentType == "pageLink") {
       const pageLinkContent = item.content as PageLinkContentType;
       const idOfPageLink = pageLinkContent.properties.pageContentLink[0].id;
-      const page = (await fetchById(preview, idOfPageLink)) as PageType;
-      const metaDescription = page.properties.metaDescription;
+      const pageLinkPageType = (await fetchById(
+        preview,
+        idOfPageLink
+      )) as PageType;
+      const metaDescription = pageLinkPageType.properties.metaDescription;
       pageLinkContent.properties.pageContentLink[0].teaserText =
         metaDescription;
-      const route = "/some-thing";
-      pageLinkContent.properties.pageContentLink[0].path = route;
+      if (pageLinkPageType.route.path == "/") {
+        //Exception For Home Path
+        pageLinkContent.properties.pageContentLink[0].path = "/";
+      } else {
+        const parrentPath = pageLinkPageType.route.startItem?.path ?? "";
+        pageLinkContent.properties.pageContentLink[0].path =
+          parrentPath + pageLinkPageType.route.path;
+      }
     }
+    // Page Link Content Type End
   });
 
   await Promise.all(routesPromises);

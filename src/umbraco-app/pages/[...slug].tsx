@@ -3,6 +3,7 @@ import {
   fetchByPath,
   fetchPageFolders,
   fetchSubPagesFromFolder,
+  GetMetaDataForGrid,
 } from "../lib/nxo_api";
 import Head from "next/head";
 import Container from "../components/container";
@@ -58,6 +59,10 @@ export async function getStaticProps(props) {
   const draftMode = props.draftMode ?? false;
   const lastPathOfSlug = props.params.slug?.pop() ?? "";
   const pageByPath = (await fetchByPath(draftMode, lastPathOfSlug)) as PageType;
+  pageByPath.properties.grid = await GetMetaDataForGrid(
+    draftMode,
+    pageByPath.properties.grid
+  );
   return {
     props: {
       page: pageByPath,

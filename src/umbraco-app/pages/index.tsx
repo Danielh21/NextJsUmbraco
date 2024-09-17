@@ -32,7 +32,6 @@ export default function Index({ page, preview }: Props) {
 export async function getStaticProps(props) {
   const draftMode = props.draftMode ?? false;
   const homePage = (await fetchHome(draftMode)) as PageType;
-  homePage.properties.grid;
   homePage.properties.grid = await GetMetaDataForGrid(
     draftMode,
     homePage.properties.grid
