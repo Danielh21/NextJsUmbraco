@@ -3,6 +3,9 @@ import Author from "../types/author";
 import PostAndMorePosts from "../types/postAndMorePosts";
 import pageFolder from "../types/pagesFolder";
 import pageRoutingModel from "../types/pageRoutingModel";
+import { GridContent, GridType } from "../types/gridType";
+import PageLinkContentType from "../types/PageLinkContentType";
+import PageType from "../types/pageType";
 
 const UMBRACO_SERVER_URL = process.env.UMBRACO_SERVER_URL;
 const UMBRACO_DELIVERY_API_KEY = process.env.UMBRACO_DELIVERY_API_KEY;
@@ -90,4 +93,39 @@ export const fetchByPath = async (preview: boolean, path: string) => {
     },
   });
   return response;
+};
+
+export const fetchById = async (preview: boolean, id: string) => {
+  const url = `${UMBRACO_API_URL}/item/${id}?fields=properties%5B%24all%5D`;
+
+  var response = await performFetch(url, {
+    method: "GET",
+    headers: {
+      "Api-Key": UMBRACO_DELIVERY_API_KEY,
+      Preview: preview ? "true" : "false",
+    },
+  });
+  return response;
+};
+
+export const GetMetaDataForGrid = async (
+  preview: boolean,
+  grid: GridType
+): Promise<GridType> => {
+  const routesPromises = grid.items.map(async (item) => {
+    // Getting metadata for specific items
+    if (item.content.contentType == "pageLink") {
+      const pageLinkContent = item.content as PageLinkContentType;
+      const idOfPageLink = pageLinkContent.properties.pageContentLink[0].id;
+      const page = (await fetchById(preview, idOfPageLink)) as PageType;
+      const metaDescription = page.properties.metaDescription;
+      pageLinkContent.properties.pageContentLink[0].teaserText =
+        metaDescription;
+      const route = "/some-thing";
+      pageLinkContent.properties.pageContentLink[0].path = route;
+    }
+  });
+
+  await Promise.all(routesPromises);
+  return grid;
 };

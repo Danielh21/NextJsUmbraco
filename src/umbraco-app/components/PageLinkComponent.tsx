@@ -8,10 +8,16 @@ interface PageLinkProps {
 
 function PageLinkComponent({ content }: PageLinkProps) {
   const { properties } = content;
+  const link = properties.pageContentLink[0];
   return (
     <div className="flex flex-col gap-5">
       <h2>Super Link under Here:</h2>
-      <a href=""> {properties.linkTitle} </a>
+      <a href={link.path}> {properties.linkTitle} </a>
+
+      <div>
+        <p>Here is Meta Text about the page: </p>
+        <p>{link.teaserText} - </p>
+      </div>
     </div>
   );
 }

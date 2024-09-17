@@ -2,7 +2,7 @@ import Head from "next/head";
 import Container from "../components/container";
 import Layout from "../components/layout";
 import { EXAMPLE_TOOL_NAME } from "../lib/constants";
-import { fetchHome } from "../lib/nxo_api";
+import { fetchHome, GetMetaDataForGrid } from "../lib/nxo_api";
 import PageType from "../types/pageType";
 import Grid from "../components/grid";
 
@@ -32,6 +32,11 @@ export default function Index({ page, preview }: Props) {
 export async function getStaticProps(props) {
   const draftMode = props.draftMode ?? false;
   const homePage = (await fetchHome(draftMode)) as PageType;
+  homePage.properties.grid;
+  homePage.properties.grid = await GetMetaDataForGrid(
+    draftMode,
+    homePage.properties.grid
+  );
   return {
     props: {
       page: homePage,
