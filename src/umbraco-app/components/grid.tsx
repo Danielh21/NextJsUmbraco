@@ -16,7 +16,8 @@ const Grid = ({ Grid }: GridPros) => {
     <div className="flex flex-col gap-6">
       <h2></h2>
       {Grid.items.map((gridItem, inx) => {
-        return project(gridItem);
+        
+        return <div key={inx}>{project(gridItem)}</div>;
       })}
     </div>
   );

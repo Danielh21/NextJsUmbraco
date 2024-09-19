@@ -22,12 +22,15 @@ const DynamicPage: NextPage = ({ page, preview }: PageProps) => {
 
   return (
     <>
-      <Layout preview={preview}>
+      <Layout
+        metaKeyWord={page.properties.metaDescription}
+        metaDescription={page.properties.metaKeyWord}
+        preview={preview}
+      >
         <Head>
-          <title>Next.js Blog Example with {EXAMPLE_TOOL_NAME}</title>
+          <title>{`${page.name}`}</title>
         </Head>
         <Container>
-          <h2>{page.properties.metaKeyWord}</h2>
           <Grid Grid={gridItems} />
         </Container>
       </Layout>

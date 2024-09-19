@@ -16,18 +16,21 @@ export default function Index({ page, preview }: Props) {
 
   return (
     <>
-      <Layout preview={preview}>
+      <Layout
+        metaKeyWord={page.properties.metaDescription}
+        metaDescription={page.properties.metaKeyWord}
+        preview={preview}
+      >
         <Head>
-          <title>Next.js Blog Example with {EXAMPLE_TOOL_NAME}</title>
+          <title>{`${page.name}`}</title>
         </Head>
         <Container>
-          <h2>{page.properties.metaKeyWord}</h2>
           <Grid Grid={gridItems} />
         </Container>
       </Layout>
     </>
   );
-}
+};
 
 export async function getStaticProps(props) {
   const draftMode = props.draftMode ?? false;

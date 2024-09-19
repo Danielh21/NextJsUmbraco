@@ -4,6 +4,8 @@ import Meta from "./meta";
 
 type Props = {
   preview?: boolean;
+  metaKeyWord?: string;
+  metaDescription?: string;
   children: React.ReactNode;
 };
 

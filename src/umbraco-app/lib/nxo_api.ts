@@ -6,6 +6,7 @@ import pageRoutingModel from "../types/pageRoutingModel";
 import { GridContent, GridType } from "../types/gridType";
 import PageLinkContentType from "../types/PageLinkContentType";
 import PageType from "../types/pageType";
+import Picture from "../types/picture";
 
 const UMBRACO_SERVER_URL = process.env.UMBRACO_SERVER_URL;
 const UMBRACO_DELIVERY_API_KEY = process.env.UMBRACO_DELIVERY_API_KEY;
@@ -123,9 +124,13 @@ export const GetMetaDataForGrid = async (
         preview,
         idOfPageLink
       )) as PageType;
-      const metaDescription = pageLinkPageType.properties.metaDescription;
-      pageLinkContent.properties.pageContentLink[0].teaserText =
-        metaDescription;
+      const teaserText = pageLinkPageType.properties.teaserText;
+      let teaserImage: Picture = null;
+      if (pageLinkPageType.properties.teaserImage) {
+        teaserImage = pageLinkPageType.properties?.teaserImage[0];
+      }
+      pageLinkContent.properties.pageContentLink[0].teaserText = teaserText;
+      pageLinkContent.properties.pageContentLink[0].teaserImage = teaserImage;
       if (pageLinkPageType.route.path == "/") {
         //Exception For Home Path
         pageLinkContent.properties.pageContentLink[0].path = "/";

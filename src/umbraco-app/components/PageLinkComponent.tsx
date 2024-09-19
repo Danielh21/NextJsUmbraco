@@ -9,15 +9,27 @@ interface PageLinkProps {
 function PageLinkComponent({ content }: PageLinkProps) {
   const { properties } = content;
   const link = properties.pageContentLink[0];
+  const umbracoServerURL =
+    process.env.UMBRACO_SERVER_URL ?? "http://localhost:15756";
   return (
     <div className="flex flex-col gap-5">
-      <h2>Super Link under Here:</h2>
-      <a href={link.path}> {properties.linkTitle} </a>
-
-      <div>
-        <p>Here is Meta Text about the page: </p>
-        <p>{link.teaserText} - </p>
-      </div>
+      <a href={link.path}>
+        {" "}
+        <span className="cursor-pointer text-indigo-400 ">
+          {properties.linkTitle}{" "}
+        </span>
+        <div>
+          <p>{link.teaserText}</p>
+          {link.teaserImage && (
+            <Image
+              width={400}
+              height={400}
+              alt={`Teaser Image`}
+              src={umbracoServerURL + link.teaserImage.url}
+            />
+          )}
+        </div>
+      </a>
     </div>
   );
 }

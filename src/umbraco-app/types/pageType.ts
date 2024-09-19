@@ -1,4 +1,5 @@
 import { GridType } from "./gridType";
+import Picture from "./picture";
 
 type PageType = {
   name: string;
@@ -13,6 +14,8 @@ type PageType = {
   properties: {
     metaDescription: string;
     metaKeyWord: string;
+    teaserText: string;
+    teaserImage: Picture[];
     grid: GridType;
   };
 };

@@ -13,7 +13,7 @@ function Hero({ content }: HeroProps) {
   const image = properties.image[0];
   return (
     <div>
-      <h1>{properties.headline}</h1>
+      <h1 className="text-5xl font-bold">{properties.headline}</h1>
       <Image
         width={2000}
         height={1000}
