@@ -40,16 +40,14 @@ export const fetchPageFolders = async (preview: boolean) => {
     folders.push({
       id: it.id,
       path: it.route.path,
+      route: { ...it.route },
     });
   });
 
   return folders;
 };
 
-export const fetchSubPagesFromFolder = async (
-  folder: pageFolder,
-  preview: boolean
-) => {
+export const fetchAllPageTypes = async (preview: boolean) => {
   const url = `${UMBRACO_API_URL}?filter=contentType:page&fields=properties[id]`;
 
   var response = await performFetch(url, {
@@ -57,15 +55,14 @@ export const fetchSubPagesFromFolder = async (
     headers: {
       "Api-Key": UMBRACO_DELIVERY_API_KEY,
       Preview: preview ? "true" : "false",
-      "Start-Item": folder.id,
     },
   });
 
   const items = response.items;
   const routingModel: string[] = [];
   items.forEach((it) => {
-    let combinedRoute = folder.path + it.route.path.substring(1);
-    routingModel.push(combinedRoute);
+    let path = it.route.path;
+    routingModel.push(path);
   });
   return routingModel;
 };
@@ -131,16 +128,9 @@ export const GetMetaDataForGrid = async (
       }
       pageLinkContent.properties.pageContentLink[0].teaserText = teaserText;
       pageLinkContent.properties.pageContentLink[0].teaserImage = teaserImage;
-      if (pageLinkPageType.route.path == "/") {
-        //Exception For Home Path
-        pageLinkContent.properties.pageContentLink[0].path = "/";
-      } else {
-        const parrentPath = pageLinkPageType.route.startItem?.path ?? "";
-        pageLinkContent.properties.pageContentLink[0].path =
-          parrentPath + pageLinkPageType.route.path;
-      }
+      pageLinkContent.properties.pageContentLink[0].path =
+        pageLinkPageType.route.path;
     }
-    // Page Link Content Type End
   });
 
   await Promise.all(routesPromises);

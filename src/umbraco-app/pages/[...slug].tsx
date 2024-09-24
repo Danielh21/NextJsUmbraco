@@ -1,8 +1,7 @@
 import { NextPage } from "next";
 import {
+  fetchAllPageTypes,
   fetchByPath,
-  fetchPageFolders,
-  fetchSubPagesFromFolder,
   GetMetaDataForGrid,
 } from "../lib/nxo_api";
 import Head from "next/head";
@@ -38,18 +37,7 @@ const DynamicPage: NextPage = ({ page, preview }: PageProps) => {
   );
 };
 export async function getStaticPaths({ preview }: { preview: boolean }) {
-  const folders = await fetchPageFolders(false);
-  let paths: string[] = [];
-
-  const routesPromises = folders.map(async (folder) => {
-    const routes = await fetchSubPagesFromFolder(folder, false);
-    return routes; // Return the fetched routes
-  });
-
-  const allRoutes = await Promise.all(routesPromises);
-
-  paths = paths.concat(...allRoutes);
-
+  const paths = await fetchAllPageTypes(preview);
   console.log(paths);
 
   return {
@@ -60,8 +48,8 @@ export async function getStaticPaths({ preview }: { preview: boolean }) {
 
 export async function getStaticProps(props) {
   const draftMode = props.draftMode ?? false;
-  const lastPathOfSlug = props.params.slug?.pop() ?? "";
-  const pageByPath = (await fetchByPath(draftMode, lastPathOfSlug)) as PageType;
+  const path = props.params.slug.join("/");
+  const pageByPath = (await fetchByPath(draftMode, path)) as PageType;
   pageByPath.properties.grid = await GetMetaDataForGrid(
     draftMode,
     pageByPath.properties.grid
