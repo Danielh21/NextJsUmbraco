@@ -1,3 +1,5 @@
+using Site.Services;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.CreateUmbracoBuilder()
@@ -5,9 +7,11 @@ builder.CreateUmbracoBuilder()
     .AddWebsite()
     .AddDeliveryApi()
     .AddComposers()
+    .SetContentLastChanceFinder<FourOhFourContentFinder>()
     .Build();
 
 WebApplication app = builder.Build();
+//app.UseMiddleware<NextJSRedirect>();
 
 await app.BootUmbracoAsync();
 
@@ -24,5 +28,12 @@ app.UseUmbraco()
         u.UseBackOfficeEndpoints();
         u.UseWebsiteEndpoints();
     });
+app.UseStatusCodePages(async context =>
+{
+    if (context.HttpContext.Response.StatusCode == 404)
+    {
+        context.HttpContext.Response.Redirect("http://external-domain.com");
+    }
+});
 
 await app.RunAsync();

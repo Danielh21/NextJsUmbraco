@@ -26,10 +26,8 @@ namespace Site.Controller
             {
                 var content =  umbracoContextReference.UmbracoContext.Content.GetById(id);
                 var path = content.Url();
-                var parrentPath = content?.Parent?.Url();
-                var combinedPath = parrentPath + path.Substring(1);
                 var previewSecret = "preview";
-                return new RedirectResult($"http://localhost:7523/api/preview?secret={previewSecret}&path={combinedPath}");
+                return new RedirectResult($"http://localhost:7523/api/preview?secret={previewSecret}&path={path}");
             }
         }
     }
