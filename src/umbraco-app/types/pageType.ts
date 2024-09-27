@@ -14,8 +14,8 @@ type PageType = {
   properties: {
     metaDescription: string;
     metaKeyWord: string;
-    teaserText: string;
-    teaserImage: Picture[];
+    textTeaser: string;
+    imageTeaser: Picture[];
     grid: GridType;
   };
 };

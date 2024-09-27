@@ -1,6 +1,3 @@
-import Post from "../types/post";
-import Author from "../types/author";
-import PostAndMorePosts from "../types/postAndMorePosts";
 import pageFolder from "../types/pagesFolder";
 import pageRoutingModel from "../types/pageRoutingModel";
 import { GridContent, GridType } from "../types/gridType";
@@ -121,10 +118,10 @@ export const GetMetaDataForGrid = async (
         preview,
         idOfPageLink
       )) as PageType;
-      const teaserText = pageLinkPageType.properties.teaserText;
+      const teaserText = pageLinkPageType.properties.textTeaser;
       let teaserImage: Picture = null;
-      if (pageLinkPageType.properties.teaserImage) {
-        teaserImage = pageLinkPageType.properties?.teaserImage[0];
+      if (pageLinkPageType.properties.imageTeaser) {
+        teaserImage = pageLinkPageType.properties?.imageTeaser[0];
       }
       pageLinkContent.properties.pageContentLink[0].teaserText = teaserText;
       pageLinkContent.properties.pageContentLink[0].teaserImage = teaserImage;

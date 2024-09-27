@@ -7,7 +7,6 @@ import {
 import Head from "next/head";
 import Container from "../components/container";
 import Layout from "../components/layout";
-import { EXAMPLE_TOOL_NAME } from "../lib/constants";
 import PageType from "../types/pageType";
 import Grid from "../components/grid";
 

@@ -9,10 +9,15 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function Layout({ preview, children }: Props) {
+export default function Layout({
+  preview,
+  metaDescription,
+  metaKeyWord,
+  children,
+}: Props) {
   return (
     <>
-      <Meta />
+      <Meta metaDescription={metaDescription} metaKeyWord={metaKeyWord} />
       <div className="min-h-screen">
         <Alert preview={preview} />
         <main>{children}</main>

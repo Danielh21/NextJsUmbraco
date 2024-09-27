@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Container from "../components/container";
 import Layout from "../components/layout";
-import { EXAMPLE_TOOL_NAME } from "../lib/constants";
 import { fetchHome, GetMetaDataForGrid } from "../lib/nxo_api";
 import PageType from "../types/pageType";
 import Grid from "../components/grid";
@@ -17,8 +16,8 @@ export default function Index({ page, preview }: Props) {
   return (
     <>
       <Layout
-        metaKeyWord={page.properties.metaDescription}
-        metaDescription={page.properties.metaKeyWord}
+        metaKeyWord={page.properties.metaKeyWord}
+        metaDescription={page.properties.metaDescription}
         preview={preview}
       >
         <Head>

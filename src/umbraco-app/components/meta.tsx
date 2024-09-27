@@ -1,7 +1,11 @@
 import Head from "next/head";
-import { EXAMPLE_TOOL_NAME } from "../lib/constants";
 
-export default function Meta() {
+interface MetaProps {
+  metaDescription: string;
+  metaKeyWord: string;
+}
+
+export default function Meta({ metaDescription, metaKeyWord }: MetaProps) {
   return (
     <Head>
       <link
@@ -32,10 +36,8 @@ export default function Meta() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <meta
-        name="description"
-        content={`A statically generated blog example using Next.js and ${EXAMPLE_TOOL_NAME}.`}
-      />
+      <meta name="description" content={metaDescription} />
+      <meta name="keywords" content={metaKeyWord} />
     </Head>
   );
 }
