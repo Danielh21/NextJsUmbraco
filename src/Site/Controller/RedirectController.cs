@@ -8,11 +8,19 @@ namespace Site.Controller
     public class RedirectController : UmbracoApiController
     {
 
+        private readonly IConfiguration Configuration;
+
+        public RedirectController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         [HttpGet]
         [Route("")]
         public  RedirectResult Base(string path)
         {
-            return new RedirectResult($"http://localhost:7523{path}");
+            var baseURLNextApp = Configuration.GetValue<string>("NextEnv:BaseURL");
+            return new RedirectResult($"{baseURLNextApp}{path}");
         }
 
     }

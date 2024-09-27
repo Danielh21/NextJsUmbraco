@@ -11,7 +11,6 @@ builder.CreateUmbracoBuilder()
     .Build();
 
 WebApplication app = builder.Build();
-//app.UseMiddleware<NextJSRedirect>();
 
 await app.BootUmbracoAsync();
 

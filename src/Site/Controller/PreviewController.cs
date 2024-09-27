@@ -11,10 +11,12 @@ namespace Site.Controller
     {
 
         private readonly IUmbracoContextFactory UmbracoContextFactory;
+        private readonly IConfiguration Configuration;
 
-        public PreviewApiController(IUmbracoContextFactory umbracoContextFactory)
+        public PreviewApiController(IUmbracoContextFactory umbracoContextFactory, IConfiguration configuration)
         {
             UmbracoContextFactory = umbracoContextFactory;
+            Configuration = configuration;
         }
 
         [HttpGet]
@@ -26,8 +28,9 @@ namespace Site.Controller
             {
                 var content =  umbracoContextReference.UmbracoContext.Content.GetById(id);
                 var path = content.Url();
-                var previewSecret = "preview";
-                return new RedirectResult($"http://localhost:7523/api/preview?secret={previewSecret}&path={path}");
+                var previewSecret = Configuration.GetValue<string>("NextEnv:PreviewSecret");
+                var baseURLNextApp = Configuration.GetValue<string>("NextEnv:BaseURL");
+                return new RedirectResult($"{baseURLNextApp}/api/preview?secret={previewSecret}&path={path}");
             }
         }
     }
