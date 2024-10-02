@@ -1,3 +1,4 @@
+import SiteLayoutContentType from "../types/SiteLayoutContentType";
 import Alert from "./alert";
 import Footer from "./footer";
 import Meta from "./meta";
@@ -7,6 +8,7 @@ type Props = {
   metaKeyWord?: string;
   metaDescription?: string;
   children: React.ReactNode;
+  siteLayout?: SiteLayoutContentType;
 };
 
 export default function Layout({
@@ -14,6 +16,7 @@ export default function Layout({
   metaDescription,
   metaKeyWord,
   children,
+  siteLayout,
 }: Props) {
   return (
     <>
@@ -22,7 +25,7 @@ export default function Layout({
         <Alert preview={preview} />
         <main>{children}</main>
       </div>
-      <Footer />
+      <Footer siteLayout={siteLayout} />
     </>
   );
 }

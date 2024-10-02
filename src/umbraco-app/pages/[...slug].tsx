@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import {
   fetchAllPageTypes,
   fetchByPath,
+  fetchSiteLayoutProperties,
   GetMetaDataForGrid,
 } from "../lib/nxo_api";
 import Head from "next/head";
@@ -9,13 +10,15 @@ import Container from "../components/container";
 import Layout from "../components/layout";
 import PageType from "../types/pageType";
 import Grid from "../components/grid";
+import SiteLayoutContentType from "../types/SiteLayoutContentType";
 
 type PageProps = {
   page: PageType;
   preview: boolean;
+  siteLayout: SiteLayoutContentType;
 };
 
-const DynamicPage: NextPage = ({ page, preview }: PageProps) => {
+const DynamicPage: NextPage = ({ page, preview, siteLayout }: PageProps) => {
   const gridItems = page.properties.grid;
 
   return (
@@ -24,6 +27,7 @@ const DynamicPage: NextPage = ({ page, preview }: PageProps) => {
         metaKeyWord={page.properties.metaDescription}
         metaDescription={page.properties.metaKeyWord}
         preview={preview}
+        siteLayout={siteLayout}
       >
         <Head>
           <title>{`${page.name}`}</title>
@@ -53,10 +57,16 @@ export async function getStaticProps(props) {
     draftMode,
     pageByPath.properties.grid
   );
+  const siteLayoutPropeties = await fetchSiteLayoutProperties(
+    draftMode,
+    pageByPath.route.startItem.id
+  );
+  const siteLayout = siteLayoutPropeties.items[0] as SiteLayoutContentType;
   return {
     props: {
       page: pageByPath,
       preview: draftMode,
+      siteLayout: siteLayout,
     },
   };
 }

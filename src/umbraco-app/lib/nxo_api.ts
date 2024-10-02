@@ -79,6 +79,23 @@ export const fetchHome = async (preview: boolean) => {
   return response;
 };
 
+export const fetchSiteLayoutProperties = async (
+  preview: boolean,
+  startItem: string
+) => {
+  const url = `${UMBRACO_API_URL}?filter=contentType%3AsiteLayout&take=1&fields=properties%5B%24all%5D`;
+
+  var response = await performFetch(url, {
+    method: "GET",
+    headers: {
+      "Api-Key": UMBRACO_DELIVERY_API_KEY,
+      Preview: preview ? "true" : "false",
+      "Start-Item": startItem,
+    },
+  });
+  return response;
+};
+
 export const fetchByPath = async (preview: boolean, path: string) => {
   const url = `${UMBRACO_API_URL}/item/${path}?fields=properties%5B%24all%5D`;
 
@@ -162,7 +179,6 @@ export const GetMetaDataForGrid = async (
           return umbracoLink;
         }
       );
-      console.log(pageCollectionType.properties.pagesLink);
     }
   });
 
