@@ -6,6 +6,8 @@ import TextComponent from "./textComponent";
 import TextContentType from "../types/TextContentType";
 import PageLinkContentType from "../types/PageLinkContentType";
 import PageLinkComponent from "./PageLinkComponent";
+import PageLinkCollectionContentType from "../types/PageLinkCollectionContentType";
+import PageLinkCollection from "./pageLinkCollection";
 
 interface GridPros {
   Grid: GridType;
@@ -16,7 +18,6 @@ const Grid = ({ Grid }: GridPros) => {
     <div className="flex flex-col gap-6">
       <h2></h2>
       {Grid.items.map((gridItem, inx) => {
-        
         return <div key={inx}>{project(gridItem)}</div>;
       })}
     </div>
@@ -32,6 +33,12 @@ const project = (gridItem: GridProperties) => {
     case "pageLink":
       return (
         <PageLinkComponent content={gridItem.content as PageLinkContentType} />
+      );
+    case "pageLinkCollection":
+      return (
+        <PageLinkCollection
+          content={gridItem.content as PageLinkCollectionContentType}
+        />
       );
     default:
       return <h1>No project match</h1>;

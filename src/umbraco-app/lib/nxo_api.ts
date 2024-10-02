@@ -4,6 +4,8 @@ import { GridContent, GridType } from "../types/gridType";
 import PageLinkContentType from "../types/PageLinkContentType";
 import PageType from "../types/pageType";
 import Picture from "../types/picture";
+import PageLinkCollectionContentType from "../types/PageLinkCollectionContentType";
+import UmbracoContentLinkType from "../types/UmbracoContentLinkType";
 
 const UMBRACO_SERVER_URL = process.env.UMBRACO_SERVER_URL;
 const UMBRACO_DELIVERY_API_KEY = process.env.UMBRACO_DELIVERY_API_KEY;
@@ -90,6 +92,19 @@ export const fetchByPath = async (preview: boolean, path: string) => {
   return response;
 };
 
+export const fetchChildren = async (preview: boolean, id: string) => {
+  const url = `${UMBRACO_API_URL}?fetch=children%3A${id}&fields=properties%5B%24all%5D`;
+
+  var response = await performFetch(url, {
+    method: "GET",
+    headers: {
+      "Api-Key": UMBRACO_DELIVERY_API_KEY,
+      Preview: preview ? "true" : "false",
+    },
+  });
+  return response;
+};
+
 export const fetchById = async (preview: boolean, id: string) => {
   const url = `${UMBRACO_API_URL}/item/${id}?fields=properties%5B%24all%5D`;
 
@@ -127,6 +142,27 @@ export const GetMetaDataForGrid = async (
       pageLinkContent.properties.pageContentLink[0].teaserImage = teaserImage;
       pageLinkContent.properties.pageContentLink[0].path =
         pageLinkPageType.route.path;
+    }
+
+    if (item.content.contentType == "pageLinkCollection") {
+      const pageCollectionType = item.content as PageLinkCollectionContentType;
+      const selectedFolder = pageCollectionType.properties.pageFolder[0];
+      const allChilds = await fetchChildren(preview, selectedFolder.id);
+      const allChildsAsPageArray = Array.from(allChilds.items) as PageType[];
+
+      pageCollectionType.properties.pagesLink = allChildsAsPageArray.map(
+        (it) => {
+          const umbracoLink: UmbracoContentLinkType = {
+            id: it.id,
+            teaserText: it.properties.textTeaser,
+            path: it.route.path,
+            teaserImage: it.properties.imageTeaser[0],
+            updateDate: it.updateDate, //TODO
+          };
+          return umbracoLink;
+        }
+      );
+      console.log(pageCollectionType.properties.pagesLink);
     }
   });
 

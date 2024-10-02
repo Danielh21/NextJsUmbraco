@@ -2,7 +2,7 @@ import Picture from "./picture";
 
 interface UmbracoContentLinkType {
   id: string;
-  updateDate: Date;
+  updateDate?: string;
   path: string;
   teaserText: string;
   teaserImage?: Picture;

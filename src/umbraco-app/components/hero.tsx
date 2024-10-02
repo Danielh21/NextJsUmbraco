@@ -12,10 +12,12 @@ function Hero({ content }: HeroProps) {
     process.env.UMBRACO_SERVER_URL ?? "http://localhost:15756";
   const image = properties.image[0];
   return (
-    <div>
-      <h1 className="text-5xl font-bold">{properties.headline}</h1>
+    <div className="flex flex-col items-center my-8">
+      <h1 className="text-5xl font-bold text-center w-full">
+        {properties.headline}
+      </h1>
       <Image
-        width={2000}
+        width={1000}
         height={1000}
         alt={`Cover Image for`}
         src={umbracoServerURL + image.url}

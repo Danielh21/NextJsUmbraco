@@ -3,6 +3,7 @@ import Picture from "./picture";
 
 type PageType = {
   name: string;
+  updateDate?: string;
   route: {
     path: string;
     startItem?: {
