@@ -18,28 +18,28 @@ export default function Footer({ siteLayout }: FooterProps) {
       <Container>
         <div className="py-28 flex flex-col lg:flex-row items-center">
           <div className="flex w-full justify-between">
-            <div>
-              <Image
-                width={400}
-                height={400}
-                alt={`Footer Image`}
-                src={footerImageUrl}
-              />
-            </div>
             <div className="flex flex-col gap-3">
-              {footerLinks.map((link, inx) => {
-                const finalURL =
-                  link.route == null ? link.url : link.route.path;
-                return (
-                  <Link
-                    className="underline text-blue-300"
-                    key={inx}
-                    href={finalURL}
-                  >
-                    {link.title}
-                  </Link>
-                );
-              })}
+              <div
+                className="flex flex-col gap-5"
+                dangerouslySetInnerHTML={{
+                  __html: siteLayout.properties?.footerText?.markup,
+                }}
+              />
+              <div className="flex gap-5">
+                {footerLinks.map((link, inx) => {
+                  const finalURL =
+                    link.route == null ? link.url : link.route.path;
+                  return (
+                    <Link
+                      className="underline text-blue-300"
+                      key={inx}
+                      href={finalURL}
+                    >
+                      {link.title}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ Things I added to the given example form [kjac](https://github.com/kjac/NextJsUm
 * Freedom for the content create to create nested routes
 * Custom URL namning
 * Handling of internal / external linking
+* Preview and view page redriect from umbraco to nextJS app.
 
 # Next.js + Umbraco Delivery API
 

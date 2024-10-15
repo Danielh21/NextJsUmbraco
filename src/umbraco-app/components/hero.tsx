@@ -17,8 +17,8 @@ function Hero({ content }: HeroProps) {
         {properties.headline}
       </h1>
       <Image
-        width={1000}
-        height={1000}
+        width={400}
+        height={400}
         alt={`Cover Image for`}
         src={umbracoServerURL + image.url}
       />

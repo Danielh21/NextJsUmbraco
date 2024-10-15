@@ -9,7 +9,7 @@ export default function Header({ siteLayout }: HeaderProps) {
   const navigationItems = siteLayout?.properties.navigationItems;
 
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 my-8">
+    <div className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 bg-gray-300 p-4">
       <nav className="flex gap-5 pl-4">
         {navigationItems.map((it, inx) => {
           const finalURL = it.route.path;
@@ -20,6 +20,6 @@ export default function Header({ siteLayout }: HeaderProps) {
           );
         })}
       </nav>
-    </h2>
+    </div>
   );
 }

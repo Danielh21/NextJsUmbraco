@@ -8,6 +8,7 @@ interface SiteLayoutContentType extends GridContent {
     footerImage: Picture[];
     footerLinks: URLPickerType[];
     navigationItems: PageType[];
+    footerText: RichText;
   };
 }
 
