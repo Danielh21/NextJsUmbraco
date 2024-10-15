@@ -1,12 +1,25 @@
 import Link from "next/link";
+import SiteLayoutContentType from "../types/SiteLayoutContentType";
 
-export default function Header() {
+interface HeaderProps {
+  siteLayout?: SiteLayoutContentType;
+}
+
+export default function Header({ siteLayout }: HeaderProps) {
+  const navigationItems = siteLayout?.properties.navigationItems;
+
   return (
     <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 my-8">
-      <Link href="/" className="hover:underline">
-        Blog
-      </Link>
-      .
+      <nav className="flex gap-5 pl-4">
+        {navigationItems.map((it, inx) => {
+          const finalURL = it.route.path;
+          return (
+            <div className="hover:underline">
+              <Link href={finalURL}>{it.name}</Link>
+            </div>
+          );
+        })}
+      </nav>
     </h2>
   );
 }

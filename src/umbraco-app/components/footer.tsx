@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SiteLayoutContentType from "../types/SiteLayoutContentType";
 import Container from "./container";
 import Image from "next/image";
@@ -30,13 +31,13 @@ export default function Footer({ siteLayout }: FooterProps) {
                 const finalURL =
                   link.route == null ? link.url : link.route.path;
                 return (
-                  <a
+                  <Link
                     className="underline text-blue-300"
                     key={inx}
                     href={finalURL}
                   >
                     {link.title}
-                  </a>
+                  </Link>
                 );
               })}
             </div>

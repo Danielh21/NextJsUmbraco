@@ -1,6 +1,7 @@
 import SiteLayoutContentType from "../types/SiteLayoutContentType";
 import Alert from "./alert";
 import Footer from "./footer";
+import Header from "./header";
 import Meta from "./meta";
 
 type Props = {
@@ -23,6 +24,7 @@ export default function Layout({
       <Meta metaDescription={metaDescription} metaKeyWord={metaKeyWord} />
       <div className="min-h-screen">
         <Alert preview={preview} />
+        <Header siteLayout={siteLayout} />
         <main>{children}</main>
       </div>
       <Footer siteLayout={siteLayout} />
