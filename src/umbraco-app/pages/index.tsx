@@ -6,9 +6,9 @@ import {
   fetchSiteLayoutProperties,
   GetMetaDataForGrid,
 } from "../lib/nxo_api";
-import PageType from "../types/pageType";
 import Grid from "../components/grid";
-import SiteLayoutContentType from "../types/SiteLayoutContentType";
+import { PageType, SiteLayoutContentType } from "umbraco-types-package";
+
 
 type Props = {
   page: PageType;

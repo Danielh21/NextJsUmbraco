@@ -1,5 +1,5 @@
 import React from "react";
-import UmbracoContentLinkType from "../types/UmbracoContentLinkType";
+import { UmbracoContentLinkType } from "umbraco-types-package";
 import Image from "next/image";
 
 interface SingleLinkProps {

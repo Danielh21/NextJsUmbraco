@@ -8,9 +8,8 @@ import {
 import Head from "next/head";
 import Container from "../components/container";
 import Layout from "../components/layout";
-import PageType from "../types/pageType";
+import { PageType, SiteLayoutContentType } from "umbraco-types-package";
 import Grid from "../components/grid";
-import SiteLayoutContentType from "../types/SiteLayoutContentType";
 
 type PageProps = {
   page: PageType;

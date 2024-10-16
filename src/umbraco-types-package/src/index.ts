@@ -1,2 +1,11 @@
 export { GridType, GridContent, GridProperties } from "./types/gridType";
 export { default as HeroContentType } from "./types/heroContentType";
+export { default as PageLinkCollectionContentType } from "./types/PageLinkCollectionContentType";
+export { default as PageLinkContentType } from "./types/PageLinkContentType";
+export { default as pageRoutingModel } from "./types/pageRoutingModel";
+export { default as pageFolder } from "./types/pagesFolder";
+export { default as PageType } from "./types/pageType";
+export { default as Picture } from "./types/picture";
+export { default as SiteLayoutContentType } from "./types/SiteLayoutContentType";
+export { default as TextComponentType } from "./types/TextContentType";
+export { default as UmbracoContentLinkType } from "./types/UmbracoContentLinkType";

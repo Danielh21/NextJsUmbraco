@@ -1,12 +1,14 @@
 import React from "react";
 import Hero from "./hero";
-import HeroContentType from "../types/heroContentType";
+import {
+  HeroContentType,
+  PageLinkContentType,
+  PageLinkCollectionContentType,
+  TextComponentType,
+} from "umbraco-types-package";
 import { GridProperties, GridType } from "umbraco-types-package";
 import TextComponent from "./textComponent";
-import TextContentType from "../types/TextContentType";
-import PageLinkContentType from "../types/PageLinkContentType";
 import PageLinkComponent from "./pageLinkComponent";
-import PageLinkCollectionContentType from "../types/PageLinkCollectionContentType";
 import PageLinkCollection from "./pageLinkCollection";
 
 interface GridPros {
@@ -29,7 +31,7 @@ const project = (gridItem: GridProperties) => {
     case "hero":
       return <Hero content={gridItem.content as HeroContentType} />;
     case "text":
-      return <TextComponent content={gridItem.content as TextContentType} />;
+      return <TextComponent content={gridItem.content as TextComponentType} />;
     case "pageLink":
       return (
         <PageLinkComponent content={gridItem.content as PageLinkContentType} />

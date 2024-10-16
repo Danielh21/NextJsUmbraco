@@ -1,4 +1,4 @@
-import SiteLayoutContentType from "../types/SiteLayoutContentType";
+import { SiteLayoutContentType } from "umbraco-types-package";
 import Alert from "./alert";
 import Footer from "./footer";
 import Header from "./header";

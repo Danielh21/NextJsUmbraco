@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SiteLayoutContentType from "../types/SiteLayoutContentType";
+import { SiteLayoutContentType } from "umbraco-types-package";
 
 interface HeaderProps {
   siteLayout?: SiteLayoutContentType;

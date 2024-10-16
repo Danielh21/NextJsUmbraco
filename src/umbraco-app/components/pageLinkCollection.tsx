@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import PageLinkCollectionContentType from "../types/PageLinkCollectionContentType";
+import { PageLinkCollectionContentType } from "umbraco-types-package";
 import SingleLink from "./singleLink";
 
 interface PageLinkCollectionProps {

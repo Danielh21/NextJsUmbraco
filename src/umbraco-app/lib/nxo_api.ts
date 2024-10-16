@@ -1,11 +1,12 @@
-import pageFolder from "../types/pagesFolder";
-import pageRoutingModel from "../types/pageRoutingModel";
-import { GridContent, GridType } from "../types/gridType";
-import PageLinkContentType from "../types/PageLinkContentType";
-import PageType from "../types/pageType";
-import Picture from "../types/picture";
-import PageLinkCollectionContentType from "../types/PageLinkCollectionContentType";
-import UmbracoContentLinkType from "../types/UmbracoContentLinkType";
+import {
+  PageLinkContentType,
+  pageFolder,
+  PageLinkCollectionContentType,
+  Picture,
+  PageType,
+  UmbracoContentLinkType,
+  GridType,
+} from "umbraco-types-package";
 
 const UMBRACO_SERVER_URL = process.env.UMBRACO_SERVER_URL;
 const UMBRACO_DELIVERY_API_KEY = process.env.UMBRACO_DELIVERY_API_KEY;

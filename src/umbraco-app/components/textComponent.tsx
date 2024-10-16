@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import TextContentType from "../types/TextContentType";
+import { TextComponentType } from "umbraco-types-package";
 
 interface TextProps {
-  content: TextContentType;
+  content: TextComponentType;
 }
 
 function TextComponent({ content }: TextProps) {

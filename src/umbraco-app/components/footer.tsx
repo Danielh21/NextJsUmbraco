@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SiteLayoutContentType from "../types/SiteLayoutContentType";
+import { SiteLayoutContentType } from "umbraco-types-package";
 import Container from "./container";
 import Image from "next/image";
 
