@@ -14,7 +14,7 @@ export default function Header({ siteLayout }: HeaderProps) {
         {navigationItems.map((it, inx) => {
           const finalURL = it.route.path;
           return (
-            <div className="hover:underline">
+            <div key={inx} className="hover:underline">
               <Link href={finalURL}>{it.name}</Link>
             </div>
           );

@@ -1,11 +1,11 @@
 import React from "react";
 import Hero from "./hero";
 import HeroContentType from "../types/heroContentType";
-import { GridProperties, GridType } from "../types/gridType";
+import { GridProperties, GridType } from "umbraco-types-package";
 import TextComponent from "./textComponent";
 import TextContentType from "../types/TextContentType";
 import PageLinkContentType from "../types/PageLinkContentType";
-import PageLinkComponent from "./PageLinkComponent";
+import PageLinkComponent from "./pageLinkComponent";
 import PageLinkCollectionContentType from "../types/PageLinkCollectionContentType";
 import PageLinkCollection from "./pageLinkCollection";
 

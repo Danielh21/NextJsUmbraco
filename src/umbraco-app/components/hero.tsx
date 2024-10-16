@@ -1,5 +1,5 @@
 import React from "react";
-import HeroContentType from "../types/heroContentType";
+import { HeroContentType } from "umbraco-types-package";
 import Image from "next/image";
 
 interface HeroProps {
