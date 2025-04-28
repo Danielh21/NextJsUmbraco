@@ -8,7 +8,7 @@ import {
 } from "umbraco-types-package";
 import { GridProperties, GridType } from "umbraco-types-package";
 import TextComponent from "./textComponent";
-import PageLinkComponent from "./pageLinkComponent";
+import PageLinkComponent from "./PageLinkComponent";
 import PageLinkCollection from "./pageLinkCollection";
 
 interface GridPros {
