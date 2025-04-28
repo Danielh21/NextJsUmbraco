@@ -3,6 +3,12 @@
 This Nextjs + umbraco Delivery API app, is a working example on how and  
 static created nextJS site can be build ontop of the Umbraco Delivery API.  
 
+# Password for dev:
+
+code@nexusone.dk  
+oJwzrZvo^E
+
+
 Things I added to the given example form [kjac](https://github.com/kjac/NextJsUmbracoExample)
 
 * Strong types from umbraco modeles
