@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language>
     <area alias="login">
-        <!-- <key alias="greeting0">admin@localhost / SuperSecret123</key>
-        <key alias="greeting1">admin@localhost / SuperSecret123</key>
-        <key alias="greeting2">admin@localhost / SuperSecret123</key>
-        <key alias="greeting3">admin@localhost / SuperSecret123</key>
-        <key alias="greeting4">admin@localhost / SuperSecret123</key>
-        <key alias="greeting5">admin@localhost / SuperSecret123</key>
-        <key alias="greeting6">admin@localhost / SuperSecret123</key> -->
+        <key alias="greeting0">code@nexusone.dk / oJwzrZvo^E</key>
+        <key alias="greeting1">code@nexusone.dk / oJwzrZvo^E</key>
+        <key alias="greeting2">code@nexusone.dk / oJwzrZvo^E</key>
+        <key alias="greeting3">code@nexusone.dk / oJwzrZvo^E</key>
+        <key alias="greeting4">code@nexusone.dk / oJwzrZvo^E</key>
+        <key alias="greeting5">code@nexusone.dk / oJwzrZvo^E</key>
+        <key alias="greeting6">code@nexusone.dk / oJwzrZvo^E</key>
     </area>
 </language>
