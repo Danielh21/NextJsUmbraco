@@ -1,4 +1,6 @@
+
+
 export interface Teaser {
-  // TODO: define real types
-  [key: string]: any;
+  textTeaser : string;
+	imageTeaser : any;
 }

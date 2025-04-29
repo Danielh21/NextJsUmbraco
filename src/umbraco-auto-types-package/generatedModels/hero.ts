@@ -1,4 +1,7 @@
+
+
 export interface Hero {
-  // TODO: define real types
-  [key: string]: any;
+  headline : string;
+	tagline : string;
+	image : any;
 }

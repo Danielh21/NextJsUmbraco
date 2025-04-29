@@ -1,4 +1,8 @@
+import { RichText } from "./UmbracoModels/RichText";
+
 export interface SiteLayout {
-  // TODO: define real types
-  [key: string]: any;
+  footerImage : any;
+	footerLinks : any;
+	footerText : RichText;
+	navigationItems : any;
 }

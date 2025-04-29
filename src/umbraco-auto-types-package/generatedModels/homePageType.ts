@@ -1,4 +1,9 @@
+
+
 export interface HomePageType {
-  // TODO: define real types
-  [key: string]: any;
+  grid : string;
+	textTeaser : string;
+	imageTeaser : any;
+	metaDescription : string;
+	metaKeyWord : string;
 }

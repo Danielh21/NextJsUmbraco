@@ -1,4 +1,6 @@
+import { RichText } from "./UmbracoModels/RichText";
+
 export interface Text {
-  // TODO: define real types
-  [key: string]: any;
+  header : string;
+	body : RichText;
 }
